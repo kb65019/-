@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>كباب فلفل وسماق</title>
+
+<!-- ✅ استيراد الخطوط -->
+<link href="https://fonts.googleapis.com/css2?family=Harmattan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --btn-gap: 220px;
+    --btn-bg: #efca0a;
+  }
+
+  body {
+
+
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #005b54;
+    overflow-y: auto; /* ✅ يسمح بالتمرير */
+  }
+  main-title {
+  margin-top: 120px; /* يبعد النص عن الشريط */
+}
+
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--btn-gap);
+  padding: 16px;
+  background: #005b54;
+}
+
+.main-title {
+  position: relative;
+  top: -200px; /* المسافة اللي تفصل النص عن الشريط */
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Major Mono Display', monospace;
+  font-size: 14vw;
+  color: #efca0a;
+  text-align: center;
+  z-index: 5;
+  line-height: 1.5;
+  animation: fadeIn 3s ease forwards;
+
+}
+
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 160px;
+    height: 60px;
+    background: var(--btn-bg);
+    color: #9b6845;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: transform .18s ease, background .8s ease, box-shadow .18s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  }
+
+  nav a:hover {
+    transform: translateY(-6px);
+    background: #214f83;
+    box-shadow: 0 8px 20px rgba(0,0,0,.28);
+  }
+
+  nav a img {
+    width: 160px;
+    height: 60px;
+  }
+
+
+
+  .main-title .bold {
+    font-weight: 900;
+  }
+
+  /* ✅ أنيميشن راقي */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px) scale(0.95);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+
+  /* ✅ النص العربي */
+  .haneen {
+    font-family: 'Harmattan', sans-serif;
+    color: #efca0a;
+    font-size: 42px;
+    text-align: center;
+    display: block;
+    margin-top: 200px;
+  }
+
+  /* ✅ الصور */
+  img {
+    position: absolute;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  img:hover {
+    transform: scale(1.1);
+  }
+
+  .img1 {
+    width: 200px;
+    top: 1250px;
+    right: 100px;
+  }
+
+  .img2 {
+    width: 500px;
+    bottom: 40px;
+    left: -20px;
+  }
+
+  /* ✅ محتوى إضافي لتجربة التمرير */
+  .content {
+    height: 180vh;
+    background: #014f4b;
+  }
+</style>
+</head>
+
+<body>
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#menu">Menu</a>
+    <a href="#about">About us</a>
+    <a href="#contact">Contact</a>
+    <a href="#special"><img src="Image.png" alt="ايقونة صورة"></a>
+  </nav>
+  <span class="haneen"><h1 style="font-size: 90px;">كباب فلفل وسماق</h1></span>
+
+  <!-- ✅ النص الكبير الثابت -->
+  <h1 class="main-title"><span class="bold">E</span>VERY CORNER TELLS A STORY OF FLAVOR</h1>
+
+  <!-- ✅ باقي العناصر -->
+
+  <img src="img/image1.png" class="img1" alt="صورة 1">
+  <img src="img/image 2.png" class="img2" alt="صورة 2">
+
+  <!-- ✅ مساحة للتمرير -->
+</body>
+</html>
