@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>copy10</title>
+
+<!-- ✅ استيراد الخطوط -->
+<link href="https://fonts.googleapis.com/css2?family=Harmattan&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/roxborough-cf" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Haneen&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mirza:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --btn-gap: 220px;
+    --btn-bg: #603e26;
+  }
+
+/* ✅ خلفية تشبه الحيط */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(160deg, #0a5b4a, #01715c);
+    radial-gradient(circle at top left, rgba(0,100,80,0.4), rgba(0,70,60,0.8)),
+    url('https://www.transparenttextures.com/patterns/concrete-wall.png');
+  background-size: 20px 20px, cover;
+  background-attachment: fixed;
+  background-repeat: repeat, no-repeat;
+  background-position: center, center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+
+
+
+
+
+
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--btn-gap);
+  padding: 16px;
+  background: #005b54;
+}
+
+.main-title2 {
+  position: relative;
+  top: -210px; /* المسافة اللي تفصل النص عن الشريط */
+  left: 100%;
+  transform: translateX(-50%);
+    font-family: 'Mirza', sans-serif;
+  font-size: 1.6vw;
+  color: #ffde59;
+  text-align: left;
+  z-index: 5;
+  line-height: 1.5;
+  animation: fadeIn 1s ease forwards;
+
+}
+
+
+.main-title {
+  position: relative;
+  top: -200px; /* المسافة اللي تفصل النص عن الشريط */
+  left: 65%;
+  transform: translateX(-50%);
+  font-family: 'Roxborough CF', serif;
+  font-size: 14vw;
+  color: #0171d3;
+  text-align: left;
+  z-index: 5;
+  line-height: 1.5;
+  animation: fadeIn 3s ease forwards;
+
+}
+
+
+
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 160px;
+    height: 60px;
+    background: var(--btn-bg);
+    color: #efca0a;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: transform .18s ease, background .8s ease, box-shadow .18s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  }
+
+  nav a:hover {
+    transform: translateY(-6px);
+    background: #214f83;
+    box-shadow: 0 8px 20px rgba(0,0,0,.28);
+  }
+
+  nav a img {
+    width: 166px;
+    height: 90px;
+  }
+
+
+
+
+  .main-title .bold {
+    font-weight: 900;
+  }
+
+  /* ✅ أنيميشن راقي */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px) scale(0.95);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+
+  /* ✅ النص العربي */
+  .haneen {
+    font-family: 'Harmattan', sans-serif;
+    color: #efca0a;
+    font-size: 42px;
+    text-align: center;
+    display: block;
+    margin-top: 100px;
+  }
+
+  /* ✅ الصور */
+  img {
+
+    position: absolute;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  img:hover {
+    transform: scale(1.1);
+  }
+
+  .img1 {
+    width: 200px;
+    top: 1150px;
+    right: 100px;
+        transform: rotate(75deg); /* تدوير 20 درجة */
+
+  }
+
+  .img2 {
+    width: 500px;
+    bottom: 40px;
+    left: 20px;
+  }
+    .img3 {
+    width: 500px;
+    bottom: -1100px;
+    left: 20px;
+  }
+      .img4 {
+    width: 500px;
+    bottom: -1550px;
+    left: 200px;
+  }
+
+  /* ✅ محتوى إضافي لتجربة التمرير */
+  .content {
+    height: 180vh;
+    background: #014f4b;
+  }
+
+/* ✅ هذا التأثير لكل الصور ما عدا الشعار */
+img:hover:not(.nav-logo) {
+  transform: scale(1.1);
+}
+
+/* ✅ الشعار ثابت بدون أي حركة */
+.nav-logo {
+  width: 166px;
+  height: 90px;
+  pointer-events: none;
+  transform: none !important;
+  transition: none !important;
+  cursor: default;
+}
+
+  .en {
+  position: relative;
+  top: -200px; /* المسافة اللي تفصل النص عن الشريط */
+  left: 65%;
+  transform: translateX(-50%);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14vw;
+  color: #0171d3;
+  text-align: left;
+  z-index: 5;
+  line-height: 1.5;
+  animation: fadeIn 3s ease forwards;
+  }
+
+
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    #menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    #menu-toggle span {
+      display: block;
+      width: 30px;
+      height: 3px;
+      background: #333;
+      margin-bottom: 5px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #menu-toggle span:last-child {
+      margin-bottom: 0;
+    }
+
+    #menu-toggle:hover span {
+      background: #efca0a;
+    }
+
+    #menu-toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    #menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #menu-toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    #menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background: #7b7563;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 9998;
+    }
+
+    #menu.active {
+      transform: translateX(0);
+    }
+
+    #menu ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #menu ul li {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    #menu ul li:last-child {
+      border-bottom: none;
+    }
+
+    #menu ul li a {
+      text-decoration: none;
+      color: #333;
+      transition: color 0.3s ease-in-out;
+    }
+
+    #menu ul li:hover {
+      background-color: #f5f5f5;
+    }
+
+    #menu ul li a:hover {
+      color: #666;
+    }
+
+    #menu-toggle {
+  display: none;
+}
+#menu {
+  display: none;
+}
+
+@media screen and (max-width: 375px) {
+
+
+#menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 10px;
+      cursor: pointer;
+      z-index: 9999;
+    }
+}
+
+    @media screen and (max-width: 768px) {
+
+ #desktop-nav {
+    display: none;  /* أخفي Navbar العادي على الموبايل */
+  }
+    #menu-toggle {
+  display: block;
+}
+#menu {
+  display: block;
+}
+  :root {
+    --btn-gap: 220px;
+    --btn-bg: #efca0a;
+  }
+
+
+  .haneen {
+    font-family: 'Harmattan', sans-serif;
+    color: #efca0a;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    margin-top: 60px;
+  }
+
+
+.main-title {
+  position: relative;
+  top: -20px; /* المسافة اللي تفصل النص عن الشريط */
+  left: 55%;
+  transform: translateX(-50%);
+  font-family: 'Roxborough CF', serif;
+  font-size: 14vw;
+  color: #0171d3;
+  text-align: left;
+  z-index: 5;
+  line-height: 1.5;
+  animation: fadeIn 3s ease forwards;
+
+}
+    }
+
+</style>
+</head>
+
+<body>
+
+
+  <div id="menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav id="menu">
+    <ul>
+        <br>
+                <br>
+
+        <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="index.html">Contact</a></li>
+    </ul>
+  </nav >
+
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('menu').classList.toggle('active');
+      document.getElementById('menu-toggle').classList.toggle('active');
+    });
+  </script>
+
+  <nav id="desktop-nav">
+
+
+<a href="#special"><img src="Img/kabab.png" alt="ايقونة صورة" class="nav-logo"></a>
+
+    <a href="#contact">Contact</a>
+    <a href="#about">About us</a>
+    <a href="#menu">Menu</a>
+    <a href="#home">HOME</a>
+
+  </nav>
+  <span class="haneen"><h1 >كباب فلفل وسماق</h1></span>
+
+  <!-- ✅ النص الكبير الثابت -->
+  <h1 class="main-title"> EVERY CORNER TELLS A STORY OF FLAVOR</h1>
+
+  <!-- ✅ باقي العناصر -->
+
+  <img src="img/image1.png" class="img1" alt="صورة 1">
+  <img src="img/image 3.png" class="img2" alt="صورة 2">
+ <img src="img/image 2.png" class="img3" alt="صورة 2">
+   <img src="img/image 4.png" class="img4" alt="صورة 4">
+
+  <!-- ✅ مساحة للتمرير -->
+
+  <h2 class="main-title2"> We believe that food is more than just a taste
+      <br>
+      it’s an experience an atmosphere, and memories
+      <br>
+      From the first flame of charcoal to the last sprinkle of sumac
+  </h2>
+
+
+</body>
+</html>
+
+
