@@ -233,8 +233,8 @@ img:hover:not(.nav-logo) {
 
     #menu-toggle {
       position: fixed;
-      top: 20px;
-      left: 20px;
+    top: 3%;
+      left: 10%;
       cursor: pointer;
       z-index: 9999;
     }
@@ -326,8 +326,8 @@ img:hover:not(.nav-logo) {
 
 #menu-toggle {
       position: fixed;
-      top: 20px;
-      right: 10px;
+      top: 3%;
+      left: 10%;
       cursor: pointer;
       z-index: 9999;
     }
@@ -362,7 +362,7 @@ img:hover:not(.nav-logo) {
 
 .main-title {
   position: relative;
-  top: -20px; /* المسافة اللي تفصل النص عن الشريط */
+  top: 80px; /* المسافة اللي تفصل النص عن الشريط */
   left: 65%;
   transform: translateX(-50%);
   font-family: 'Roxborough CF', serif;
@@ -376,8 +376,8 @@ img:hover:not(.nav-logo) {
 
 
   .img1 {
-    width: 100px;
-    top: 450px;
+    width: 20% ;
+    top: 38%;
     right: 60px;
         transform: rotate(75deg); /* تدوير 20 درجة */
         /*hot dog */
@@ -385,39 +385,40 @@ img:hover:not(.nav-logo) {
   }
 
   .img2 {
-    width: 200px;
-    bottom: 400px;
-    left: 20px;
+    width: 50%;
+    top: 10%;
+    left: 5%;
     /* kabab */
   }
     .img3 {
-    width: 240px;
-    bottom: -100px;
-    left: -20px;
+    width: 50%;
+    top: 55%;
+    left: 0%;
         /* borger */
 
   }
-      .img4 {
-    width: 300px;
-    bottom: -360px;
-    left: 20px;
-  }
-
-
 .main-title2 {
-  position: relative;
-  top: 390px; /* المسافة اللي تفصل النص عن الشريط */
-  left: 90%;
+  position: absolute;
+  top: 75vh; /* يبعد النص عن الشريط */
+  left: 50%;
   transform: translateX(-50%);
-    font-family: 'Mirza', sans-serif;
-  font-size: 2vw;
+  font-family: 'Mirza', sans-serif;
+  font-size: 4vw;
   color: #ffde59;
-  text-align: left;
+  text-align: center;
   z-index: 5;
   line-height: 1.5;
   animation: fadeIn 1s ease forwards;
-
 }
+
+.img4 {
+  width: 300px;
+  position: absolute;
+  top: calc(65vh  + 30%); /* موضع الصورة = موضع النص + ارتفاع النص + مسافة 10% */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 
     }
 
@@ -469,10 +470,10 @@ img:hover:not(.nav-logo) {
 
   <!-- ✅ باقي العناصر -->
 
-  <img src="img/Image1.png" class="img1" alt="صورة 1">
-  <img src="img/Image 3.png" class="img2" alt="صورة 2">
- <img src="img/Image 2.png" class="img3" alt="صورة 2">
-   <img src="img/Image 4.png" class="img4" alt="صورة 4">
+  <img src="img/image1.png" class="img1" alt="صورة 1">
+  <img src="img/image 3.png" class="img2" alt="صورة 2">
+ <img src="img/image 2.png" class="img3" alt="صورة 2">
+   <img src="img/image 4.png" class="img4" alt="صورة 4">
 
   <!-- ✅ مساحة للتمرير -->
 
