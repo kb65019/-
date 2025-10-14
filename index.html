@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>كباب فلفل وسماق</title>
+<title>copy3</title>
 
 <!-- ✅ استيراد الخطوط -->
 <link href="https://fonts.googleapis.com/css2?family=Harmattan&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/roxborough-cf" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Haneen&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 
 <style>
   :root {
     --btn-gap: 220px;
-    --btn-bg: #efca0a;
+    --btn-bg: #603e26;
   }
 
   body {
@@ -20,7 +23,8 @@
 
     margin: 0;
     font-family: system-ui, sans-serif;
-    background: #005b54;
+background: url('img/pexels-jeffrey-czum-254391-2268728.jpg') no-repeat center center fixed;
+background-size: cover;
     overflow-y: auto; /* ✅ يسمح بالتمرير */
   }
   main-title {
@@ -45,17 +49,19 @@ nav {
 .main-title {
   position: relative;
   top: -200px; /* المسافة اللي تفصل النص عن الشريط */
-  left: 50%;
+  left: 65%;
   transform: translateX(-50%);
-  font-family: 'Major Mono Display', monospace;
+  font-family: 'Roxborough CF', serif;
   font-size: 14vw;
-  color: #efca0a;
-  text-align: center;
+  color: #0171d3;
+  text-align: left;
   z-index: 5;
   line-height: 1.5;
   animation: fadeIn 3s ease forwards;
 
 }
+
+
 
   nav a {
     display: inline-flex;
@@ -65,7 +71,7 @@ nav {
     width: 160px;
     height: 60px;
     background: var(--btn-bg);
-    color: #9b6845;
+    color: #efca0a;
     text-decoration: none;
     border-radius: 30px;
     transition: transform .18s ease, background .8s ease, box-shadow .18s ease;
@@ -79,8 +85,8 @@ nav {
   }
 
   nav a img {
-    width: 160px;
-    height: 60px;
+    width: 166px;
+    height: 90px;
   }
 
 
@@ -96,6 +102,7 @@ nav {
     transform: translateX(-50%) translateY(-20px) scale(0.95);
     filter: blur(10px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(-50%) translateY(0) scale(1);
@@ -111,11 +118,12 @@ nav {
     font-size: 42px;
     text-align: center;
     display: block;
-    margin-top: 200px;
+    margin-top: 100px;
   }
 
   /* ✅ الصور */
   img {
+
     position: absolute;
     transition: transform 0.3s ease;
     cursor: pointer;
@@ -128,8 +136,10 @@ nav {
 
   .img1 {
     width: 200px;
-    top: 1250px;
+    top: 1150px;
     right: 100px;
+        transform: rotate(75deg); /* تدوير 20 درجة */
+
   }
 
   .img2 {
@@ -143,21 +153,53 @@ nav {
     height: 180vh;
     background: #014f4b;
   }
+
+/* ✅ هذا التأثير لكل الصور ما عدا الشعار */
+img:hover:not(.nav-logo) {
+  transform: scale(1.1);
+}
+
+/* ✅ الشعار ثابت بدون أي حركة */
+.nav-logo {
+  width: 166px;
+  height: 90px;
+  pointer-events: none;
+  transform: none !important;
+  transition: none !important;
+  cursor: default;
+}
+
+  .en {
+  position: relative;
+  top: -200px; /* المسافة اللي تفصل النص عن الشريط */
+  left: 65%;
+  transform: translateX(-50%);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14vw;
+  color: #0171d3;
+  text-align: left;
+  z-index: 5;
+  line-height: 1.5;
+  animation: fadeIn 3s ease forwards;
+  }
+
 </style>
 </head>
 
 <body>
   <nav>
-    <a href="#home">HOME</a>
-    <a href="#menu">Menu</a>
-    <a href="#about">About us</a>
+<a href="#special"><img src="Img/kabab.png" alt="ايقونة صورة" class="nav-logo"></a>
+
     <a href="#contact">Contact</a>
-    <a href="#special"><img src="Image.png" alt="ايقونة صورة"></a>
+    <a href="#about">About us</a>
+    <a href="#menu">Menu</a>
+    <a href="#home">HOME</a>
+
   </nav>
   <span class="haneen"><h1 style="font-size: 90px;">كباب فلفل وسماق</h1></span>
 
   <!-- ✅ النص الكبير الثابت -->
-  <h1 class="main-title"><span class="bold">E</span>VERY CORNER TELLS A STORY OF FLAVOR</h1>
+  <h1 class="main-title"> EVERY CORNER TELLS A STORY OF FLAVOR</h1>
 
   <!-- ✅ باقي العناصر -->
 
@@ -167,3 +209,5 @@ nav {
   <!-- ✅ مساحة للتمرير -->
 </body>
 </html>
+
+
