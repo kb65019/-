@@ -1,215 +1,1538 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>copy3</title>
-
-<!-- ✅ استيراد الخطوط -->
-<link href="https://fonts.googleapis.com/css2?family=Harmattan&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-<link href="https://fonts.cdnfonts.com/css/roxborough-cf" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Haneen&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --btn-gap: 220px;
-    --btn-bg: #603e26;
-  }
-
-  body {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم الذواقة - أشهى الأطباق الشرقية والغربية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 
-    margin: 0;
-    font-family: system-ui, sans-serif;
-background: url('pexels-jeffrey-czum-254391-2268728.jpg') no-repeat center center fixed;
-background-size: cover;
-    overflow-y: auto; /* ✅ يسمح بالتمرير */
-  }
-  main-title {
-  margin-top: 120px; /* يبعد النص عن الشريط */
+        :root {
+            --primary-color: #FF6B35;
+            --primary-dark: #E85A2B;
+            --secondary-color: #2C3E50;
+            --accent-color: #00D9A5;
+            --accent-dark: #00B88A;
+            --warning-color: #FFB627;
+            --danger-color: #FF4757;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --text-light: #BDC3C7;
+            --bg-light: #F8F9FA;
+            --bg-dark: #1A1A2E;
+            --border-color: #E8EAED;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #D6B98C;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .store-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .store-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.2rem;
+        }
+
+        .cart-button {
+            position: relative;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-button:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .category {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category:hover,
+        .category.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .products-container {
+            background-color:#C47A2C;
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .product-button:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge.new {
+            background: var(--primary-color);
+        }
+
+        .badge.sale {
+            background: var(--warning-color);
+        }
+
+        .prep-time {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #D6B98C;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translate(-50%, -60%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: #dc2626;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .size-option:hover {
+            border-color: var(--primary-color);
+        }
+
+        .size-option.selected {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: #b91c1c;
+            transform: scale(1.1);
+        }
+
+        .quantity-display {
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-width: 50px;
+            text-align: center;
+            padding: 0.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--secondary-color);
+            border-radius: var(--border-radius);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-error {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            color: white;
+            z-index: 1100;
+            box-shadow: var(--shadow-lg);
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .alert-success {
+            background: var(--accent-color);
+        }
+
+        .alert-error {
+            background: var(--danger-color);
+        }
+
+        .alert-warning {
+            background: var(--warning-color);
+        }
+
+        .footer {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .delivery-options {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .delivery-option {
+            flex: 1;
+            border: 2px solid var(--border-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .delivery-option:hover {
+            border-color: var(--primary-color);
+            background: var(--secondary-color);
+        }
+
+        .delivery-option input[type="radio"]:checked + span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .total-prep-time {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .categories {
+                gap: 0.5rem;
+            }
+
+            .category {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+            .size-options {
+                flex-direction: column;
+            }
+
+            .size-option {
+                flex: none;
+            }
+
+            .delivery-options {
+                flex-direction: column;
+            }
+        }
+
+        .delivery-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 10px;
 }
 
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--btn-gap);
-  padding: 16px;
-  background: #005b54;
-}
-
-.main-title {
+.delivery-card {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-align: center;
   position: relative;
-  top: -200px; /* المسافة اللي تفصل النص عن الشريط */
-  left: 65%;
-  transform: translateX(-50%);
-  font-family: 'Roxborough CF', serif;
-  font-size: 14vw;
-  color: #0171d3;
-  text-align: left;
-  z-index: 5;
-  line-height: 1.5;
-  animation: fadeIn 3s ease forwards;
-
 }
 
-
-
-  nav a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 160px;
-    height: 60px;
-    background: var(--btn-bg);
-    color: #efca0a;
-    text-decoration: none;
-    border-radius: 30px;
-    transition: transform .18s ease, background .8s ease, box-shadow .18s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,.25);
-  }
-
-  nav a:hover {
-    transform: translateY(-6px);
-    background: #214f83;
-    box-shadow: 0 8px 20px rgba(0,0,0,.28);
-  }
-
-  nav a img {
-    width: 166px;
-    height: 90px;
-  }
-
-
-
-  .main-title .bold {
-    font-weight: 900;
-  }
-
-  /* ✅ أنيميشن راقي */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px) scale(0.95);
-    filter: blur(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-    filter: blur(0);
-  }
+.delivery-card .icon {
+  font-size: 22px;
+  margin-bottom: 8px;
 }
 
-
-  /* ✅ النص العربي */
-  .haneen {
-    font-family: 'Harmattan', sans-serif;
-    color: #efca0a;
-    font-size: 42px;
-    text-align: center;
-    display: block;
-    margin-top: 100px;
-  }
-
-  /* ✅ الصور */
-  img {
-
-    position: absolute;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    z-index: 1;
-  }
-
-  img:hover {
-    transform: scale(1.1);
-  }
-
-  .img1 {
-    width: 200px;
-    top: 1150px;
-    right: 100px;
-        transform: rotate(75deg); /* تدوير 20 درجة */
-
-  }
-
-  .img2 {
-    width: 500px;
-    bottom: 40px;
-    left: -20px;
-  }
-
-  /* ✅ محتوى إضافي لتجربة التمرير */
-  .content {
-    height: 180vh;
-    background: #014f4b;
-  }
-
-/* ✅ هذا التأثير لكل الصور ما عدا الشعار */
-img:hover:not(.nav-logo) {
-  transform: scale(1.1);
+.delivery-card h4 {
+  margin: 0;
+  font-size: 15px;
 }
 
-/* ✅ الشعار ثابت بدون أي حركة */
-.nav-logo {
-  width: 166px;
-  height: 90px;
-  pointer-events: none;
-  transform: none !important;
-  transition: none !important;
-  cursor: default;
+.delivery-card p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #64748b;
 }
 
-  .en {
-  position: relative;
-  top: -200px; /* المسافة اللي تفصل النص عن الشريط */
-  left: 65%;
-  transform: translateX(-50%);
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14vw;
-  color: #0171d3;
-  text-align: left;
-  z-index: 5;
-  line-height: 1.5;
-  animation: fadeIn 3s ease forwards;
-  }
+.delivery-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
 
-</style>
+.delivery-card.active {
+  border-color: #6366f1;
+  background: #eef2ff;
+  box-shadow: 0 15px 35px rgba(99,102,241,0.25);
+}
+
+    </style>
 </head>
-
 <body>
-  <nav>
-<a href="#special"><img src="img/kabab.png" alt="ايقونة صورة" class="nav-logo"></a>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=100&h=100&fit=crop&crop=center" alt="مطعم الذواقة" class="logo">
+                    <div>
+                        <h1 class="store-name">مطعم الذواقة</h1>
+                        <p class="store-subtitle">أشهى الأطباق الشرقية والغربية</p>
+                    </div>
+                </div>
+                <button class="cart-button" onclick="openCart()">
+                    🛒 السلة
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-    <a href="copy10.html">Contact</a>
-    <a href="copy11.html">About us</a>
-    <a href="copy12.html">Menu</a>
-    <a href="copy13.html">HOME</a>
-        <a href="copy1.html">none</a>
+    <section class="hero">
+        <div class="container">
+            <h1>مرحباً بك في مطعم الذواقة</h1>
+            <p>اكتشف أشهى الأطباق العربية والعالمية مع خدمة توصيل سريع</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <nav class="categories">
+            <button class="category active" onclick="filterProducts('الكل')">الكل</button>
+            <button class="category" onclick="filterProducts('الوجبات الرئيسية')">🍽️  الوجبات الرئيسية</button>
+            <button class="category" onclick="filterProducts('المقبلات')">🍟 المقبلات</button>
+            <button class="category" onclick="filterProducts('السلطات')">🥗 السلطات</button>
+            <button class="category" onclick="filterProducts('المشروبات')">🥤 المشروبات</button>
+            <button class="category" onclick="filterProducts('الحلويات')">🍰 الحلويات</button>
+        </nav>
+
+        <div class="products-container">
+            <div class="products-grid" id="products-grid">
+                <div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+                    <div class="badge new">الأكثر طلباً</div>
+                    <img src="img/pngtree-hamburger-or-beef-burgers-with-cheese-and-french-fries-image_15656146.jpg" alt="برغر لحم كلاسيك" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-name">برغر لحم كلاسيك</h3>
+                        <p class="product-price">من 4 دينار</p>
+                        <div class="prep-time">⏱️ 10 دقائق</div>
+                        <button class="product-button" onclick="showProductDetails('برغر لحم كلاسيك', 'img/pngtree-hamburger-or-beef-burgers-with-cheese-and-french-fries-image_15656146.jpg', {'عادي': 3.50, 'كبير': 4.50, 'دبل': 5.50}, ['عادي', 'كبير', 'دبل'], 10)">
+                            إضافة إلى السلة
+                        </button>
+                    </div>
+                </div>
 
 
-  </nav>
-  <span class="haneen"><h1 style="font-size: 90px;">كباب فلفل وسماق</h1></span>
 
-  <!-- ✅ النص الكبير الثابت -->
-  <h1 class="main-title"> EVERY CORNER TELLS A STORY OF FLAVOR</h1>
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/istockphoto-521207406-612x612.jpg" alt="برغر دجاج مقرمش" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">برغر دجاج مقرمش</h3>
+        <p class="product-price">من 3.50 دينار</p>
+        <div class="prep-time">⏱️ 10–12 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('برغر دجاج مقرمش', 'img/istockphoto-521207406-612x612.jpg', {'عادي': 3.50, 'كبير': 4.50}, ['عادي', 'كبير'], '12')">
+            إضافة إلى السلة
+        </button>
+    </div>
+</div>
 
-  <!-- ✅ باقي العناصر -->
+<!-- 🍔 الوجبات الرئيسية -->
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <div class="badge new">الأكثر طلباً</div>
+    <img src="img/burger-classic.jpg" alt="برغر لحم كلاسيك" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">برغر لحم كلاسيك</h3>
+        <p class="product-price">من 3.50 دينار</p>
+        <div class="prep-time">⏱️ 10–12 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('برغر لحم كلاسيك', 'img/burger-classic.jpg', {'عادي':3.50,'كبير':4.50,'دبل':5.50}, ['عادي','كبير','دبل'], '12')">إضافة إلى السلة</button>
+    </div>
+</div>
 
-  <img src="img/Image1.png" class="img1" alt="صورة 1">
-  <img src="img/Image 2.png" class="img2" alt="صورة 2">
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/burger-chicken.jpg" alt="برغر دجاج مقرمش" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">برغر دجاج مقرمش</h3>
+        <p class="product-price">من 3.50 دينار</p>
+        <div class="prep-time">⏱️ 10–12 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('برغر دجاج مقرمش', 'img/burger-chicken.jpg', {'عادي':3.50,'كبير':4.50}, ['عادي','كبير'], '12')">إضافة إلى السلة</button>
+    </div>
+</div>
 
-  <!-- ✅ مساحة للتمرير -->
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/cheeseburger.jpg" alt="تشيز برغر دبل" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">تشيز برغر دبل</h3>
+        <p class="product-price">من 4.00 دينار</p>
+        <div class="prep-time">⏱️ 12–14 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('تشيز برغر دبل', 'img/cheeseburger.jpg', {'عادي':4.00,'دبل':5.50}, ['عادي','دبل'], '14')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/fried-chicken.jpg" alt="زنجر عربي" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">زنجر عربي</h3>
+        <p class="product-price">من 3.50 دينار</p>
+        <div class="prep-time">⏱️ 10–12 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('زنجر عربي', 'img/fried-chicken.jpg', {'عادي':3.50,'دبل':4.75,'وجبة':5.50}, ['عادي','دبل','وجبة'], '12')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/grilled-chicken.jpg" alt="فيليه دجاج مشوي" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">فيليه دجاج مشوي</h3>
+        <p class="product-price">من 4.50 دينار</p>
+        <div class="prep-time">⏱️ 12–15 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('فيليه دجاج مشوي', 'img/grilled-chicken.jpg', {'ساندويش':4.50,'طبق':5.50}, ['ساندويش','طبق'], '15')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/steak.jpg" alt="ستيك لحم" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">ستيك لحم مع صوص الفلفل</h3>
+        <p class="product-price">من 7.50 دينار</p>
+        <div class="prep-time">⏱️ 15–18 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('ستيك لحم مع صوص الفلفل', 'img/steak.jpg', {'طبق':7.50}, ['طبق'], '18')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/kebab.jpg" alt="كباب مشوي" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">كباب مشوي</h3>
+        <p class="product-price">من 6.50 دينار</p>
+        <div class="prep-time">⏱️ 15–18 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('كباب مشوي', 'img/kebab.jpg', {'طبق':6.50}, ['طبق'], '18')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الوجبات الرئيسية" data-category="الوجبات الرئيسية">
+    <img src="img/kofta.jpg" alt="كفتة بالطحينة" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">كفتة بالطحينة</h3>
+        <p class="product-price">من 6.00 دينار</p>
+        <div class="prep-time">⏱️ 15–18 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('كفتة بالطحينة', 'img/kofta.jpg', {'طبق':6.00}, ['طبق'], '18')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<!-- 🌯 الشاورما -->
+<div class="product-card الشاورما" data-category="الشاورما">
+    <img src="img/shawarma-chicken.jpg" alt="شاورما دجاج" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">شاورما دجاج</h3>
+        <p class="product-price">من 2.75 دينار</p>
+        <div class="prep-time">⏱️ 6–8 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('شاورما دجاج', 'img/shawarma-chicken.jpg', {'صاج':2.75,'عربي':3.50,'وجبة':4.75}, ['صاج','عربي','وجبة'], '8')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الشاورما" data-category="الشاورما">
+    <img src="img/shawarma-beef.jpg" alt="شاورما لحم" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">شاورما لحم</h3>
+        <p class="product-price">من 3.25 دينار</p>
+        <div class="prep-time">⏱️ 8–10 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('شاورما لحم', 'img/shawarma-beef.jpg', {'صاج':3.25,'عربي':4.00,'وجبة':5.25}, ['صاج','عربي','وجبة'], '10')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<!-- 🍕 البيتزا -->
+<div class="product-card البيتزا" data-category="البيتزا">
+    <img src="img/pizza-margherita.jpg" alt="بيتزا مارجريتا" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">بيتزا مارجريتا</h3>
+        <p class="product-price">من 4.00 دينار</p>
+        <div class="prep-time">⏱️ 12–15 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('بيتزا مارجريتا', 'img/pizza-margherita.jpg', {'صغيرة':4.00,'وسط':5.50}, ['صغيرة','وسط'], '15')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card البيتزا" data-category="البيتزا">
+    <img src="img/pizza-pepperoni.jpg" alt="بيتزا بيبروني" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">بيتزا بيبروني</h3>
+        <p class="product-price">من 5.00 دينار</p>
+        <div class="prep-time">⏱️ 12–15 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('بيتزا بيبروني', 'img/pizza-pepperoni.jpg', {'صغيرة':5.00,'وسط':6.50}, ['صغيرة','وسط'], '15')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card البيتزا" data-category="البيتزا">
+    <img src="img/pizza-vegetable.jpg" alt="بيتزا خضار" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">بيتزا خضار</h3>
+        <p class="product-price">من 4.50 دينار</p>
+        <div class="prep-time">⏱️ 12–15 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('بيتزا خضار', 'img/pizza-vegetable.jpg', {'صغيرة':4.50,'وسط':6.00}, ['صغيرة','وسط'], '15')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<!-- 🍟 المقبلات -->
+<div class="product-card المقبلات" data-category="المقبلات">
+    <img src="img/fries.jpg" alt="بطاطا مقلية" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">بطاطا مقلية</h3>
+        <p class="product-price">من 2.00 دينار</p>
+        <div class="prep-time">⏱️ 5–7 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('بطاطا مقلية', 'img/fries.jpg', {'عادي':2.00,'كبير':3.00}, ['عادي','كبير'], '7')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card المقبلات" data-category="المقبلات">
+    <img src="img/onion-rings.jpg" alt="حلقات بصل" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">حلقات بصل</h3>
+        <p class="product-price">من 2.50 دينار</p>
+        <div class="prep-time">⏱️ 7–9 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('حلقات بصل', 'img/onion-rings.jpg', {'عادي':2.50,'كبير':3.50}, ['عادي','كبير'], '9')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card المقبلات" data-category="المقبلات">
+    <img src="img/mozzarella-sticks.jpg" alt="أصابع موزاريلا" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">أصابع موزاريلا</h3>
+        <p class="product-price">من 3.00 دينار</p>
+        <div class="prep-time">⏱️ 8–10 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('أصابع موزاريلا', 'img/mozzarella-sticks.jpg', {'4 قطع':3.00,'6 قطع':4.00}, ['4 قطع','6 قطع'], '10')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card المقبلات" data-category="المقبلات">
+    <img src="img/nuggets.jpg" alt="ناغتس دجاج" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">ناغتس دجاج</h3>
+        <p class="product-price">من 3.50 دينار</p>
+        <div class="prep-time">⏱️ 8–10 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('ناغتس دجاج', 'img/nuggets.jpg', {'6 قطع':3.50,'12 قطع':6.50}, ['6 قطع','12 قطع'], '10')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<!-- 🥗 السلطات -->
+<div class="product-card السلطات" data-category="السلطات">
+    <img src="img/caesar-salad.jpg" alt="سلطة سيزر" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">سلطة سيزر</h3>
+        <p class="product-price">من 3.50 دينار</p>
+        <div class="prep-time">⏱️ 5–7 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('سلطة سيزر', 'img/caesar-salad.jpg', {'عادي':3.50,'مع دجاج':4.50}, ['عادي','مع دجاج'], '7')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card السلطات" data-category="السلطات">
+    <img src="img/fattoush.jpg" alt="سلطة فتوش" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">سلطة فتوش</h3>
+        <p class="product-price">من 2.50 دينار</p>
+        <div class="prep-time">⏱️ 5–7 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('سلطة فتوش', 'img/fattoush.jpg', {'عادي':2.50,'كبير':3.50}, ['عادي','كبير'], '7')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card السلطات" data-category="السلطات">
+    <img src="img/greek-salad.jpg" alt="سلطة يونانية" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">سلطة يونانية</h3>
+        <p class="product-price">من 3.00 دينار</p>
+        <div class="prep-time">⏱️ 5–7 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('سلطة يونانية', 'img/greek-salad.jpg', {'عادي':3.00,'كبير':4.00}, ['عادي','كبير'], '7')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<!-- 🥤 المشروبات -->
+<div class="product-card المشروبات" data-category="المشروبات">
+    <img src="img/xx.png" alt="مشروب غازي" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">مشروب غازي</h3>
+        <p class="product-price">من 0.75 دينار</p>
+        <div class="prep-time">⏱️ فوراً</div>
+        <button class="product-button" onclick="showProductDetails('مشروب غازي', 'img/xx.png', {'صغير':0.75,'كبير':1.00}, ['صغير','كبير'], '0')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card المشروبات" data-category="المشروبات">
+    <img src="img/orange-juice.jpg" alt="عصير برتقال طبيعي" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">عصير برتقال طبيعي</h3>
+        <p class="product-price">من 2.50 دينار</p>
+        <div class="prep-time">⏱️ 3–5 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('عصير برتقال طبيعي', 'img/orange-juice.jpg', {'كوب':2.50}, ['كوب'], '5')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card المشروبات" data-category="المشروبات">
+    <img src="img/lemon-mint.jpg" alt="ليمون نعنع" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">ليمون نعنع</h3>
+        <p class="product-price">من 2.00 دينار</p>
+        <div class="prep-time">⏱️ 3–5 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('ليمون نعنع', 'img/lemon-mint.jpg', {'كوب':2.00}, ['كوب'], '5')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<!-- 🍰 الحلويات -->
+<div class="product-card الحلويات" data-category="الحلويات">
+    <img src="img/cheesecake.jpg" alt="تشيز كيك" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">تشيز كيك</h3>
+        <p class="product-price">من 2.50 دينار</p>
+        <div class="prep-time">⏱️ 2–3 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('تشيز كيك', 'img/cheesecake.jpg', {'قطعة':2.50}, ['قطعة'], '3')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+<div class="product-card الحلويات" data-category="الحلويات">
+    <img src="img/brownie.jpg" alt="براوني" class="product-image">
+    <div class="product-info">
+        <h3 class="product-name">براوني</h3>
+        <p class="product-price">من 2.00 دينار</p>
+        <div class="prep-time">⏱️ 2–3 دقائق</div>
+        <button class="product-button" onclick="showProductDetails('براوني', 'img/brownie.jpg', {'قطعة':2.00}, ['قطعة'], '3')">إضافة إلى السلة</button>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 مطعم الذواقة. جميع الحقوق محفوظة.</p>
+            <p>📞 للطلبات والاستفسارات: <a href="tel:0797459207">0797459207</a></p>
+        </div>
+    </footer>
+
+<script>
+
+  // المتغيرات الأساسية
+let cart = [];
+let currentProduct = {};
+
+// تصفية المنتجات حسب الفئة
+function filterProducts(category) {
+    const products = document.querySelectorAll('.product-card');
+    const categories = document.querySelectorAll('.category');
+
+    // تحديث الفئة النشطة
+    categories.forEach(cat => cat.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // إظهار/إخفاء المنتجات
+    products.forEach(product => {
+        if (category === 'الكل' || product.dataset.category === category) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+
+// عرض تفاصيل المنتج
+function showProductDetails(name, image, prices, sizes, prepTime) {
+    currentProduct = {
+        name: name,
+        image: image,
+        prices: prices,
+        sizes: sizes,
+        prepTime: prepTime,
+        selectedSize: sizes[0],
+        quantity: 1
+    };
+
+    const modal = document.getElementById('productModal');
+    if (!modal) {
+        createProductModal();
+    }
+
+    updateProductModal();
+    document.getElementById('productModal').style.display = 'block';
+}
+
+// إنشاء نافذة المنتج
+function createProductModal() {
+    const modal = document.createElement('div');
+    modal.id = 'productModal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" onclick="closeProductModal()">×</button>
+                <h2 id="modal-product-name"></h2>
+            </div>
+            <div class="modal-body">
+                <img id="modal-product-image" src="" alt="" style="width: 100%; border-radius: 12px; margin-bottom: 1rem;">
+                <h3 style="margin-bottom: 0.5rem;">اختر الحجم:</h3>
+                <div class="size-options" id="size-options"></div>
+                <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">الكمية:</h3>
+                <div class="quantity-controls">
+                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                    <div class="quantity-display" id="quantity-display">1</div>
+                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                </div>
+                <div class="cart-total" id="modal-price">السعر: 0 دينار</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="addToCart()">إضافة إلى السلة</button>
+                <button class="btn btn-secondary" onclick="closeProductModal()">إلغاء</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeProductModal();
+        }
+    });
+}
+
+// تحديث نافذة المنتج
+function updateProductModal() {
+    document.getElementById('modal-product-name').textContent = currentProduct.name;
+    document.getElementById('modal-product-image').src = currentProduct.image;
+    document.getElementById('quantity-display').textContent = currentProduct.quantity;
+
+    const sizeOptions = document.getElementById('size-options');
+    sizeOptions.innerHTML = '';
+
+    currentProduct.sizes.forEach(size => {
+        const sizeBtn = document.createElement('div');
+        sizeBtn.className = 'size-option' + (size === currentProduct.selectedSize ? ' selected' : '');
+        sizeBtn.textContent = `${size} - ${currentProduct.prices[size]} دينار`;
+        sizeBtn.onclick = () => selectSize(size, sizeBtn);
+        sizeOptions.appendChild(sizeBtn);
+    });
+
+    updateModalPrice();
+}
+
+// اختيار الحجم
+function selectSize(size, element) {
+    currentProduct.selectedSize = size;
+    const sizeOptions = document.querySelectorAll('.size-option');
+    sizeOptions.forEach(opt => opt.classList.remove('selected'));
+    element.classList.add('selected');
+    updateModalPrice();
+}
+
+// زيادة الكمية
+function increaseQuantity() {
+    currentProduct.quantity++;
+    document.getElementById('quantity-display').textContent = currentProduct.quantity;
+    updateModalPrice();
+}
+
+// تقليل الكمية
+function decreaseQuantity() {
+    if (currentProduct.quantity > 1) {
+        currentProduct.quantity--;
+        document.getElementById('quantity-display').textContent = currentProduct.quantity;
+        updateModalPrice();
+    }
+}
+
+// تحديث السعر
+function updateModalPrice() {
+    const price = currentProduct.prices[currentProduct.selectedSize] * currentProduct.quantity;
+    document.getElementById('modal-price').textContent = `السعر: ${price} دينار`;
+}
+
+// إضافة إلى السلة
+function addToCart() {
+    const item = {
+        name: currentProduct.name,
+        size: currentProduct.selectedSize,
+        quantity: currentProduct.quantity,
+        price: currentProduct.prices[currentProduct.selectedSize],
+        total: currentProduct.prices[currentProduct.selectedSize] * currentProduct.quantity,
+        prepTime: currentProduct.prepTime
+    };
+
+    cart.push(item);
+    updateCartCount();
+    showAlert('تم إضافة المنتج إلى السلة بنجاح', 'success');
+    closeProductModal();
+}
+
+// تحديث عدد المنتجات في السلة
+function updateCartCount() {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-count').textContent = count;
+}
+
+// إغلاق نافذة المنتج
+function closeProductModal() {
+    const modal = document.getElementById('productModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// فتح السلة
+function openCart() {
+    if (cart.length === 0) {
+        showAlert('السلة فارغة!', 'warning');
+        return;
+    }
+
+    const modal = document.getElementById('cartModal');
+    if (!modal) {
+        createCartModal();
+    }
+
+    updateCartModal();
+    document.getElementById('cartModal').style.display = 'block';
+}
+
+// إنشاء نافذة السلة
+function createCartModal() {
+    const modal = document.createElement('div');
+    modal.id = 'cartModal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" onclick="closeCart()">×</button>
+                <h2>🛒 سلة المشتريات</h2>
+            </div>
+            <div class="modal-body" id="cart-items"></div>
+            <div class="total-prep-time" id="total-prep-time"></div>
+            <div class="cart-total" id="cart-total">الإجمالي: 0 دينار</div>
+            <div class="modal-footer">
+                <button class="btn" onclick="proceedToCheckout()">إتمام الطلب</button>
+                <button class="btn btn-secondary" onclick="closeCart()">متابعة التسوق</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeCart();
+        }
+    });
+}
+
+// تحديث نافذة السلة
+function updateCartModal() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; padding: 2rem;">السلة فارغة</p>';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+            <div>
+                <strong>${item.name}</strong>
+                <br>
+                <small>الحجم: ${item.size} | الكمية: ${item.quantity}</small>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <strong style="color: var(--primary-color);">${item.total} دينار</strong>
+                <button class="btn btn-danger" style="padding: 0.5rem;" onclick="removeFromCart(${index})">🗑️</button>
+            </div>
+        `;
+        cartItems.appendChild(itemDiv);
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.total, 0);
+    document.getElementById('cart-total').textContent = `الإجمالي: ${total} دينار`;
+
+    const totalPrepTime = Math.max(...cart.map(item => item.prepTime));
+    document.getElementById('total-prep-time').textContent = `⏱️ وقت التحضير المتوقع: ${totalPrepTime} دقيقة`;
+}
+
+// حذف من السلة
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartCount();
+    updateCartModal();
+    showAlert('تم حذف المنتج من السلة', 'success');
+}
+
+// إغلاق السلة
+function closeCart() {
+    const modal = document.getElementById('cartModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// الانتقال للدفع
+function proceedToCheckout() {
+    closeCart();
+    const modal = document.getElementById('checkoutModal');
+    if (!modal) {
+        createCheckoutModal();
+    }
+    document.getElementById('checkoutModal').style.display = 'block';
+}
+
+// إنشاء نافذة الدفع
+function createCheckoutModal() {
+    const modal = document.createElement('div');
+    modal.id = 'checkoutModal';
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" onclick="closeCheckout()">×</button>
+                <h2>📝 إتمام الطلب</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="customer-name">الاسم الكامل *</label>
+                    <input type="text" id="customer-name" placeholder="أدخل اسمك الكامل" required>
+                    <div class="form-error" id="name-error">الرجاء إدخال الاسم</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-phone">رقم الهاتف *</label>
+                    <input type="tel" id="customer-phone" placeholder="07XXXXXXXX" required>
+                    <div class="form-error" id="phone-error">الرجاء إدخال رقم هاتف صحيح (يبدأ بـ 07)</div>
+                </div>
+
+                <div class="form-group">
+                    <label>طريقة الاستلام *</label>
+                  <div class="delivery-cards">
+  <div class="delivery-card active" onclick="selectDelivery(this, true)">
+    <div class="icon">🚚</div>
+    <h4>توصيل</h4>
+    <p>يوصل الطلب إلى باب المنزل</p>
+    <input type="radio" name="deliveryMethod" value="delivery" checked hidden>
+  </div>
+
+  <div class="delivery-card" onclick="selectDelivery(this, false)">
+    <div class="icon">🏪</div>
+    <h4>استلام</h4>
+    <p>استلام الطلب من المطعم</p>
+    <input type="radio" name="deliveryMethod" value="pickup" hidden>
+  </div>
+</div>
+
+                </div>
+
+                <div class="form-group" id="location-group">
+                    <label for="customer-location">العنوان *</label>
+                    <textarea id="customer-location" placeholder="أدخل عنوانك التفصيلي" required></textarea>
+                    <div class="form-error" id="location-error">الرجاء إدخال العنوان</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-notes">ملاحظات إضافية (اختياري)</label>
+                    <textarea id="customer-notes" placeholder="أي ملاحظات خاصة بالطلب"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="submitOrder()">إرسال الطلب 📱</button>
+                <button class="btn btn-secondary" onclick="closeCheckout()">رجوع</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeCheckout();
+        }
+    });
+}
+
+// تبديل حقل العنوان
+function toggleLocation(isDelivery) {
+    const locationGroup = document.getElementById('location-group');
+    const locationInput = document.getElementById('customer-location');
+    const locationLabel = locationGroup.querySelector('label');
+
+    if (isDelivery) {
+        locationGroup.style.display = 'block';
+        locationInput.required = true;
+        locationLabel.innerHTML = 'العنوان *';
+    } else {
+        locationGroup.style.display = 'none';
+        locationInput.required = false;
+        locationInput.value = '';
+        locationLabel.innerHTML = 'العنوان (اختياري)';
+    }
+}
+
+// إغلاق نافذة الدفع
+function closeCheckout() {
+    const modal = document.getElementById('checkoutModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// التحقق من البيانات
+function validateForm() {
+    let isValid = true;
+    const name = document.getElementById('customer-name').value.trim();
+    const phone = document.getElementById('customer-phone').value.trim();
+    const location = document.getElementById('customer-location').value.trim();
+    const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+
+    document.querySelectorAll('.form-error').forEach(err => err.style.display = 'none');
+    document.querySelectorAll('input, textarea').forEach(input => input.style.borderColor = 'var(--border-color)');
+
+    if (!name) {
+        document.getElementById('name-error').style.display = 'block';
+        document.getElementById('customer-name').style.borderColor = 'var(--danger-color)';
+        isValid = false;
+    }
+
+    const phoneRegex = /^07[0-9]{8}$/;
+    if (!phone || !phoneRegex.test(phone)) {
+        document.getElementById('phone-error').style.display = 'block';
+        document.getElementById('customer-phone').style.borderColor = 'var(--danger-color)';
+        isValid = false;
+    }
+
+    if (deliveryMethod === 'delivery' && !location) {
+        document.getElementById('location-error').style.display = 'block';
+        document.getElementById('customer-location').style.borderColor = 'var(--danger-color)';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+// إرسال الطلب
+function submitOrder() {
+    if (!validateForm()) {
+        return;
+    }
+
+    const name = document.getElementById('customer-name').value.trim();
+    const phone = document.getElementById('customer-phone').value.trim();
+    const location = document.getElementById('customer-location').value.trim();
+    const notes = document.getElementById('customer-notes').value.trim();
+    const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+    const deliveryText = deliveryMethod === 'delivery' ? '🚚 توصيل' : '🏪 استلام من المطعم';
+
+    let message = `🛒 *طلب جديد من مطعم الذواقة*\n\n`;
+    message += `👤 *الاسم:* ${name}\n`;
+    message += `📞 *الهاتف:* ${phone}\n`;
+    message += `📦 *طريقة الاستلام:* ${deliveryText}\n`;
+
+    if (deliveryMethod === 'delivery') {
+        message += `📍 *العنوان:* ${location}\n`;
+    }
+
+    message += `\n📦 *تفاصيل الطلب:*\n`;
+    message += `━━━━━━━━━━━━━━━━\n`;
+
+    let total = 0;
+    cart.forEach((item, index) => {
+        message += `${index + 1}. ${item.name}\n`;
+        message += `   الحجم: ${item.size}\n`;
+        message += `   الكمية: ${item.quantity}\n`;
+        message += `   السعر: ${item.total} دينار\n\n`;
+        total += item.total;
+    });
+
+    message += `━━━━━━━━━━━━━━━━\n`;
+    message += `💰 *الإجمالي: ${total} دينار*\n\n`;
+
+    const totalPrepTime = Math.max(...cart.map(item => item.prepTime));
+    message += `⏱️ *وقت التحضير المتوقع:* ${totalPrepTime} دقيقة\n\n`;
+
+    if (notes) {
+        message += `📝 *ملاحظات:* ${notes}\n\n`;
+    }
+
+    message += `⏰ وقت الطلب: ${new Date().toLocaleString('ar-JO')}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = '962797459207';
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappURL, '_blank');
+
+    cart = [];
+    updateCartCount();
+    closeCheckout();
+
+    showAlert('تم إرسال طلبك بنجاح! سيتم التواصل معك قريباً', 'success');
+
+    setTimeout(() => {
+        document.getElementById('customer-name').value = '';
+        document.getElementById('customer-phone').value = '';
+        document.getElementById('customer-location').value = '';
+        document.getElementById('customer-notes').value = '';
+    }, 1000);
+}
+
+// إظهار التنبيهات
+function showAlert(message, type) {
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    alert.textContent = message;
+    document.body.appendChild(alert);
+
+    setTimeout(() => {
+        alert.style.opacity = '0';
+        setTimeout(() => {
+            document.body.removeChild(alert);
+        }, 300);
+    }, 3000);
+}
+
+// تحميل الصفحة
+window.addEventListener('load', () => {
+    console.log('مرحباً بك في مطعم الذواقة!');
+});
+
+    function selectDelivery(card, isDelivery) {
+  document.querySelectorAll('.delivery-card').forEach(c => {
+    c.classList.remove('active');
+    c.querySelector('input').checked = false;
+  });
+
+  card.classList.add('active');
+  card.querySelector('input').checked = true;
+
+  toggleLocation(isDelivery);
+}
+
+    </script>
 </body>
 </html>
-
-
