@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مطعم الذواقة - القائمة الذكية</title>
+    <title>مطعم الذواقة - القائمة الاحترافية</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -19,169 +20,233 @@
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            max-width: 1000px;
-            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
 
-        /* قسم المنيو (القادم من جوجل شيت) */
-        .menu-section {
-            padding: 30px;
-            background: #fff;
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            padding: 50px;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
             margin-top: 20px;
         }
 
-        .meal-card {
-            background: #f8f9fa;
+        .menu-item {
+            background: white;
             border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid #eee;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        .meal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
-        .meal-card img {
+        /* تنسيق الصورة */
+        .item-image {
             width: 100%;
-            height: 150px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            background: #eee;
         }
 
-        .meal-card h3 { color: #333; margin-bottom: 8px; }
+        /* حالة عدم وجود صورة (عرض إيموجي) */
+        .item-emoji {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            font-size: 4em;
+        }
 
-        .meal-card .price {
+        .item-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-name {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .item-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 0.95em;
+            flex-grow: 1;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .item-price {
+            font-size: 1.5em;
             color: #764ba2;
             font-weight: bold;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+
+        .error {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: #e74c3c;
             font-size: 1.2em;
         }
 
-        /* قسم الخريطة */
-        .map-container { padding: 30px; background: #fdfdfd; }
-        .map-wrapper {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            height: 400px;
-        }
-        iframe { width: 100%; height: 100%; border: none; }
-
-        .info {
-            padding: 30px;
-            background: #f8f9fa;
-            text-align: center;
-        }
-
-        .info h2 { color: #667eea; margin-bottom: 15px; }
-        .info p { color: #555; margin-bottom: 10px; line-height: 1.6; }
-        .info a { color: #764ba2; text-decoration: none; font-weight: bold; }
-
         @media (max-width: 768px) {
-            .header h1 { font-size: 2em; }
-            .menu-grid { grid-template-columns: 1fr 1fr; }
+            .menu-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2em; }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>🍽️ مطعم الذواقة</h1>
+            <p class="subtitle">أشهى الأطباق بلمسة عصرية - اطلب عبر الواتساب مباشرة</p>
+        </header>
 
-<div class="container">
-    <div class="header">
-        <h1>🍽️ مطعم الذواقة</h1>
-        <p>استمتع بأشهى المأكولات - قائمة متجددة يومياً</p>
-    </div>
-
-    <div class="menu-section">
-        <h2 style="text-align: center; color: #444;">قائمة الطعام</h2>
-        <div id="menu-loader" style="text-align: center; padding: 20px;">جاري تحميل القائمة...</div>
-        <div id="menu-grid" class="menu-grid">
-            </div>
-    </div>
-
-    <div class="map-container">
-        <div class="map-wrapper">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13454.436322046!2d36.004144!3d32.5599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151be6d5b03f0001%3A0x7d6537b03657375a!2sAr-Ramtha!5e0!3m2!1sen!2sjo!4v1700000000000"></iframe>
+        <div id="menuContainer">
+            <div class="loading">جاري تحميل القائمة الطازجة...</div>
         </div>
     </div>
 
-    <div class="info">
-        <h2>معلومات التواصل</h2>
-        <p>📍 العنوان: الرمثا، إربد، الأردن</p>
-        <p>📞 الهاتف: <a href="tel:+962797459207">0797459207</a></p>
-        <p>🕐 ساعات العمل: 9:00 ص - 11:00 م</p>
-    </div>
-</div>
+    <script>
+        // 1. ضع رابط الـ CSV الخاص بك هنا
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXkCy5JpDems5Xokxpes0W7aOA7VV-jESJWroVmmV5jhM33DImmbAbzoRRNjg4V7gzTDRGGH8A-Lev/pub?output=csv";
+        
+        // 2. رقم واتساب المطعم (بدون أصفار أو علامة + في البداية)
+        const whatsappNumber = "962797459207"; 
 
-<script>
-    // 1. ضع هنا رابط الـ CSV الذي حصلت عليه من (Publish to Web) في جوجل شيت
-    const sheetURL = "ضع_رابط_CSV_هنا";
+        async function loadMenu() {
+            try {
+                const response = await fetch(sheetURL);
+                const csvText = await response.text();
 
-    async function loadMenu() {
-        try {
-            const response = await fetch(sheetURL);
-            const data = await response.text();
-            
-            // تحويل الـ CSV إلى أسطر
-            const rows = data.split('\n').slice(1); 
-            const menuGrid = document.getElementById('menu-grid');
-            const loader = document.getElementById('menu-loader');
-            
-            loader.style.display = 'none'; // إخفاء كلمة جاري التحميل
-            
-            rows.forEach(row => {
-                // تقسيم السطر بناءً على الفواصل (مع مراعاة الفواصل داخل النصوص أحياناً)
-                const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                
-                if(columns.length >= 5) {
-                    const id = columns[0];
-                    const name = columns[1];
-                    const price = columns[2];
-                    const description = columns[3];
-                    const image = columns[5];
-
-                    const card = `
-                        <div class="meal-card">
-                            <img src="${image.trim()}" alt="${name}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
-                            <h3>${name}</h3>
-                            <p style="font-size: 0.9em; color: #777; margin-bottom: 10px;">${description}</p>
-                            <div class="price">${price} دينار</div>
-                        </div>
-                    `;
-                    menuGrid.innerHTML += card;
-                }
-            });
-        } catch (error) {
-            console.error("خطأ في جلب البيانات:", error);
-            document.getElementById('menu-loader').innerText = "عذراً، تعذر تحميل القائمة حالياً.";
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        displayItems(results.data);
+                    }
+                });
+            } catch (error) {
+                showError('عذراً، حدث خلل في الاتصال بالقائمة.');
+            }
         }
-    }
 
-    // تشغيل الدالة عند تحميل الصفحة
-    window.onload = loadMenu;
-</script>
+        function displayItems(items) {
+            const container = document.getElementById('menuContainer');
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="error">القائمة فارغة حالياً، تابعونا قريباً!</div>';
+                return;
+            }
 
+            const menuHTML = items.map(item => {
+                const name = item.name || item.Name || 'وجبة شهية';
+                const price = item.price || item.Price || '0';
+                const desc = item.description || item.Description || '';
+                const category = item.category || item.Category || 'عام';
+                const img = item.image || item.Image || '';
+                const emoji = getEmoji(category);
+
+                // تجهيز رابط الواتساب مع رسالة جاهزة
+                const waMessage = encodeURIComponent(`مرحباً مطعم الذواقة، أود طلب: ${name}\nالسعر: ${price} د.أ`);
+                const waLink = `https://wa.me/${whatsappNumber}?text=${waMessage}`;
+
+                // عرض الصورة أو الإيموجي إذا لم توجد صورة
+                const imageSection = img 
+                    ? `<img src="${img}" class="item-image" onerror="this.parentElement.innerHTML='<div class=\'item-emoji\'>${emoji}</div>'">` 
+                    : `<div class="item-emoji">${emoji}</div>`;
+
+                return `
+                    <div class="menu-item">
+                        ${imageSection}
+                        <div class="item-content">
+                            <div class="item-name">${name}</div>
+                            <div class="item-description">${desc}</div>
+                            <div class="item-footer">
+                                <div class="item-price">${price} د.أ</div>
+                                <a href="${waLink}" target="_blank" class="whatsapp-btn">اطلب الآن 💬</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `<div class="menu-grid">${menuHTML}</div>`;
+        }
+
+        function getEmoji(cat) {
+            const map = { 'مقبلات': '🥗', 'بيتزا': '🍕', 'برغر': '🍔', 'مشروبات': '🥤', 'حلويات': '🍰' };
+            return map[cat] || '🍽️';
+        }
+
+        function showError(msg) {
+            document.getElementById('menuContainer').innerHTML = `<div class="error">${msg}</div>`;
+        }
+
+        loadMenu();
+    </script>
 </body>
 </html>
