@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم الذواقة</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            padding: 50px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+        }
+
+        .item-content {
+            padding: 20px;
+        }
+
+        .item-name {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .item-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .item-price {
+            font-size: 1.8em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .item-category {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .error {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍽️ مطعم الذواقة</h1>
+            <p class="subtitle">أشهى الأطباق وأطيب المأكولات</p>
+        </header>
+
+        <div id="menuContainer">
+            <div class="loading">جاري تحميل القائمة...</div>
+        </div>
+    </div>
+
+    <script>
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRXkCy5JpDems5Xokxpes0W7aOA7VV-jESJWroVmmV5jhM33DImmbAbzoRRNjg4V7gzTDRGGH8A-Lev/pub?output=csv";
+
+        async function loadMenu() {
+            try {
+                const response = await fetch(sheetURL);
+                const csvText = await response.text();
+
+                Papa.parse(csvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        displayItems(results.data);
+                    },
+                    error: function(error) {
+                        showError('حدث خطأ في تحليل البيانات: ' + error.message);
+                    }
+                });
+            } catch (error) {
+                showError('حدث خطأ في تحميل القائمة. يرجى المحاولة لاحقاً.');
+                console.error('Error:', error);
+            }
+        }
+
+        function displayItems(items) {
+            const container = document.getElementById('menuContainer');
+
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="error">لا توجد عناصر في القائمة حالياً</div>';
+                return;
+            }
+
+            const menuHTML = items.map(item => {
+                const name = item.name || item.Name || item['الاسم'] || 'غير محدد';
+                const price = item.price || item.Price || item['السعر'] || '0';
+                const description = item.description || item.Description || item['الوصف'] || '';
+                const category = item.category || item.Category || item['الفئة'] || 'عام';
+                const emoji = getEmojiForCategory(category);
+
+                return `
+                    <div class="menu-item">
+                        <div class="item-image">${emoji}</div>
+                        <div class="item-content">
+                            <div class="item-name">${name}</div>
+                            <div class="item-description">${description}</div>
+                            <div class="item-footer">
+                                <div class="item-price">${price} د.أ</div>
+                                <div class="item-category">${category}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `<div class="menu-grid">${menuHTML}</div>`;
+        }
+
+        function getEmojiForCategory(category) {
+            const emojis = {
+                'مقبلات': '🥗',
+                'أطباق رئيسية': '🍽️',
+                'مشاوي': '🍖',
+                'معجنات': '🥐',
+                'حلويات': '🍰',
+                'مشروبات': '🥤',
+                'سلطات': '🥗',
+                'default': '🍴'
+            };
+
+            const lowerCategory = category.toLowerCase();
+            for (let key in emojis) {
+                if (lowerCategory.includes(key.toLowerCase())) {
+                    return emojis[key];
+                }
+            }
+            return emojis.default;
+        }
+
+        function showError(message) {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = `<div class="error">${message}</div>`;
+        }
+
+        // تحميل القائمة عند فتح الصفحة
+        loadMenu();
+    </script>
+</body>
+</html>
